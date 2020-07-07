@@ -1,9 +1,12 @@
 package com.dscepointblank.pointblank.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import com.dscepointblank.pointblank.R
+import com.dscepointblank.pointblank.WebScrap.codeforceActivity
 import com.dscepointblank.pointblank.notifications.*
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
@@ -50,5 +53,11 @@ class MainActivity : AppCompatActivity() {
         {
             Log.d("DDDD",e.localizedMessage!!)
         }
+    }
+
+    fun codeforcesClicked(view: View) {
+
+        val intent = Intent(this,codeforceActivity::class.java)
+        startActivity(intent)
     }
 }
