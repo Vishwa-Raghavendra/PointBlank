@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">PointBlank</string>
+    <string name="logo_firsthalf"><![CDATA[<.]]></string>
+    <string name="forgot_password"><u>Forgot Password?</u></string>
+    <string name="signUp"><u>Sign Up</u></string>
 </resources>
