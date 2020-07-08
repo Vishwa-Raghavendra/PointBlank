@@ -5,4 +5,10 @@
     <color name="colorAccent">#03DAC5</color>
     <color name="lightgreen">#9ccd62</color>
     <color name="green">#00c853</color>
+
+    <color name="colorPrimary2">#FF0909</color>
+    <color name="colorPrimaryDark2">#303F9F</color>
+    <color name="colorAccent2">#238443</color>
+    <color name="colorTextPrimary2">#212121</color>
+    <color name="colorTextSecondary2">#757575</color>
 </resources>
