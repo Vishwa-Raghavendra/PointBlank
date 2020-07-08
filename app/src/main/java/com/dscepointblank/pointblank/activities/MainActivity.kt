@@ -1,13 +1,20 @@
 package com.dscepointblank.pointblank.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import androidx.core.content.ContextCompat
 import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.notifications.*
+import com.example.android.pointblankviewpager.IntroSliderAdapter
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_viewpager.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -17,11 +24,12 @@ const val  TOPIC ="/topics/MyTopic"
 class MainActivity : AppCompatActivity() {
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //val  notifications = MyNotifications(this)
+
 
         FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
         button.setOnClickListener {
@@ -51,4 +59,7 @@ class MainActivity : AppCompatActivity() {
             Log.d("DDDD",e.localizedMessage!!)
         }
     }
+
+
+
 }

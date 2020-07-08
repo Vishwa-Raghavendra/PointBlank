@@ -3,4 +3,8 @@
     <string name="logo_firsthalf"><![CDATA[<.]]></string>
     <string name="forgot_password"><u>Forgot Password?</u></string>
     <string name="signUp"><u>Sign Up</u></string>
+    <string name="skip_intro">SKIP INTRO</string>
+    <string name="next">NEXT</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
