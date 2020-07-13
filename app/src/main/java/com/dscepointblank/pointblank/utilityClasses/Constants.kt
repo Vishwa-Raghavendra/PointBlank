@@ -13,23 +13,6 @@ class Constants
         //Update Constants
         const val UPDATE_COLLECTION = "UPDATE"
         const val UPDATE_DOCUMENT ="NEWVERSION"
-        const val CURRENT_APK_VERSION = 4
-
-         val tagLines = arrayOf(
-             "Its not a bug, its an undocumented feature",
-             "BB is not a feeling, its an Emotion",
-             "Bad or missing mouse driver. Spank the cat [Y/N]?",
-             "To understand what recursion is, you must first understand recursion",
-             "We know the right keystrokes to turn things on. ;)",
-             "Once you start programming, you no longer have a life",
-             "The name is Baud......, James Baud.",
-             "Do not be afraid to step on people.\nMario made a career from it",
-             "Become a programmer, lose your brain’s virginity",
-             "Take a <\\br>",
-             "Not sure, if you are a good programmer or good at googling",
-             "Valar Codilis. All men must code.",
-             "F"
-        )
-         val tagLineSize = tagLines.size
+        const val CURRENT_APK_VERSION = 2;
     }
 }

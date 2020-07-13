@@ -1,6 +1,6 @@
 //This class is used for updating app procedure
 
-package com.dscepointblank.pointblank.utilityClasses
+package com.dscepointblank.pointblank.activities
 
 import android.Manifest
 import android.app.Activity
@@ -19,9 +19,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import com.dscepointblank.pointblank.BuildConfig
 import com.dscepointblank.pointblank.R
-import com.dscepointblank.pointblank.activities.MainActivity
 import com.dscepointblank.pointblank.models.UpdateModel
 import com.dscepointblank.pointblank.notifications.MyNotifications
+import com.dscepointblank.pointblank.utilityClasses.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

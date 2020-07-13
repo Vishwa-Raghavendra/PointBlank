@@ -6,14 +6,17 @@ import android.widget.Toast
 import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.models.UpdateModel
 import com.dscepointblank.pointblank.notifications.*
-import com.dscepointblank.pointblank.utilityClasses.DownloadController
+import com.dscepointblank.pointblank.utilityClasses.Constants
 import com.dscepointblank.pointblank.utilityClasses.RetrofitInstance
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import java.lang.Exception
 
@@ -56,11 +59,7 @@ class MainActivity : BaseActivity() {
 
     private fun checkForUpdates() =
         try {
-            downloadController =
-                DownloadController(
-                    this@MainActivity,
-                    UpdateModel(1, "d")
-                )
+            downloadController = DownloadController(this@MainActivity, UpdateModel(1,"d"))
             downloadController.beginDownloadProcess()
         }
         catch (e :Exception)

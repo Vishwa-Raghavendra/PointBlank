@@ -22,7 +22,7 @@
     <string name="storage_access_required">Storage access is required to downloading the file.</string>
     <string name="storage_permission_denied">Storage permission request was denied.</string>
     <string name="ok">Enable</string>
-    <string name="logotexts"><![CDATA[<. >]]></string>
-    <string name="leftHalf"><![CDATA[<.]]></string>
+    <string name="bracket1"><![CDATA[<.]]></string>
+    <string name="bracket2"><![CDATA[>]]></string>
 
 </resources>

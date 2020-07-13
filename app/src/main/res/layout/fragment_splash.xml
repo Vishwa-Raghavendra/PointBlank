@@ -4,76 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    app:layout_optimizationLevel="standard"
-    tools:background="@color/deepBlack"
+    android:background="@color/deepBlack"
     tools:context=".fragments.SplashFragment">
 
-    <TextView
-        android:id="@+id/splashPbTv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/lightWhight"
-        android:textSize="40sp"
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="278dp"
+        android:layout_height="288dp"
+        android:src="@drawable/pointblank_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".45"
-        tools:text="Point Blank" />
+        app:layout_constraintVertical_bias=".3" />
 
     <TextView
-        android:id="@+id/textView18"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text=">"
-        android:textColor="@color/green"
-        android:textSize="64sp"
-        app:layout_constraintBottom_toTopOf="@+id/splashPbTv"
-        app:layout_constraintEnd_toEndOf="@+id/splashPbTv"
-        app:layout_constraintHorizontal_bias="0.57"
-        app:layout_constraintStart_toStartOf="@+id/splashPbTv" />
-
-    <TextView
-        android:id="@+id/textView19"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/leftHalf"
-        android:textColor="@color/lightWhight"
-        android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView18"
-        app:layout_constraintEnd_toStartOf="@+id/textView18"
-        app:layout_constraintTop_toTopOf="@+id/textView18"
-        app:layout_constraintVertical_bias=".6" />
-
-    <TextView
-        android:id="@+id/splashTagLineTV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:gravity="center"
+        android:text="Its not a bug - its an Undocumented Feature"
         android:textColor="@android:color/darker_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/splashPbTv"
-        tools:text="Its not a bug its an undocumented feature" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
-        android:textColor="@color/green"
-        android:text="ACM ICPC| GSOC | SIH | FOSS"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toStartOf="@+id/imageView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
