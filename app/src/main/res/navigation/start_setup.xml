@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.dscepointblank.pointblank.ui.fragments.LoginFragment"
+        android:name="com.dscepointblank.pointblank.ui.fragments.Login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -52,7 +52,11 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment2"
-        android:name="com.dscepointblank.pointblank.ui.fragments.SignUpFragment"
+        android:name="com.dscepointblank.pointblank.ui.fragments.SignUp.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment2_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

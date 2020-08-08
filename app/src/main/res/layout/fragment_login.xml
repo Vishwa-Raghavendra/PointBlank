@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/deepBlack"
     android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
-    tools:context=".ui.fragments.LoginFragment">
+    tools:context=".ui.fragments.Login.LoginFragment">
+
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/group"
@@ -100,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
+        android:id="@+id/loginEmail"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -121,6 +122,7 @@
         app:layout_constraintVertical_bias=".05">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_loginEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:foregroundTint="@color/redColor"
@@ -129,7 +131,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/loginPassword"
         style="@style/Widget.App.TextInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -139,19 +141,20 @@
         app:boxStrokeWidth="2dp"
         app:endIconMode="password_toggle"
         app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="@+id/textInputLayout"
-        app:layout_constraintStart_toStartOf="@+id/textInputLayout"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout"
+        app:layout_constraintEnd_toEndOf="@+id/loginEmail"
+        app:layout_constraintStart_toStartOf="@+id/loginEmail"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmail"
         app:layout_constraintVertical_bias=".05">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_loginPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
+        android:id="@+id/login_proceed"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -163,7 +166,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/group"
         app:layout_constraintEnd_toEndOf="@+id/group"
         app:layout_constraintStart_toStartOf="@+id/group"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2"
+        app:layout_constraintTop_toBottomOf="@+id/loginPassword"
         app:layout_constraintVertical_bias=".15" />
 
     <TextView
@@ -174,9 +177,9 @@
         android:text="OR"
         android:textColor="@color/White"
         app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
-        app:layout_constraintStart_toStartOf="@+id/appCompatButton"
-        app:layout_constraintTop_toBottomOf="@+id/appCompatButton"
+        app:layout_constraintEnd_toEndOf="@+id/login_proceed"
+        app:layout_constraintStart_toStartOf="@+id/login_proceed"
+        app:layout_constraintTop_toBottomOf="@+id/login_proceed"
         app:layout_constraintVertical_bias=".1" />
 
     <TextView
@@ -190,8 +193,8 @@
         android:textSize="16sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/group"
-        app:layout_constraintEnd_toEndOf="@+id/appCompatButton"
-        app:layout_constraintStart_toStartOf="@+id/appCompatButton"
+        app:layout_constraintEnd_toEndOf="@+id/login_proceed"
+        app:layout_constraintStart_toStartOf="@+id/login_proceed"
         app:layout_constraintTop_toBottomOf="@+id/textView9"
         app:layout_constraintVertical_bias=".1" />
 

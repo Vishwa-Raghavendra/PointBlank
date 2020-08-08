@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dscepointblank.pointblank">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -21,10 +20,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name="com.dscepointblank.pointblank.ui.activities.BaseActivity" />
-        <activity android:name="com.dscepointblank.pointblank.ui.activities.demoLogin"/>
-
+        <activity android:name=".ui.activities.SignUpActivity"></activity>
+        <activity android:name=".ui.activities.LoginActivity" />
+        <activity android:name=".ui.activities.BaseActivity" />
+        <activity android:name=".ui.activities.demoLogin" />
 
         <service
             android:name=".notifications.FirebaseService"
@@ -36,14 +35,10 @@
         </service>
 
         <activity
-            android:name="com.dscepointblank.pointblank.ui.activities.LaunchActivity"
-            android:theme="@style/NoActionBar">
-
-
-        </activity>
-
+            android:name=".ui.activities.LaunchActivity"
+            android:theme="@style/NoActionBar" />
         <activity
-            android:name="com.dscepointblank.pointblank.ui.activities.HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,5 +59,3 @@
     </application>
 
 </manifest>
-
-<!--    android:theme="@style/Splash"-->
