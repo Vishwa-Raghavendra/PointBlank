@@ -7,13 +7,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dscepointblank.pointblank.R
+import com.dscepointblank.pointblank.adapters.EventsAdapter
+import com.dscepointblank.pointblank.models.Object
 import com.dscepointblank.pointblank.models.UpdateModel
 import com.dscepointblank.pointblank.notifications.PushNotification
 import com.dscepointblank.pointblank.utilityClasses.DownloadController
+import com.dscepointblank.pointblank.utilityClasses.InjectorUtils
+import com.dscepointblank.pointblank.utilityClasses.Resource
 import com.dscepointblank.pointblank.utilityClasses.RetrofitInstance
+import com.dscepointblank.pointblank.viewmodels.fragViewModels.HomeScreenFragViewModel
 import com.google.gson.Gson
 import jp.wasabeef.blurry.Blurry
+import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -22,11 +34,13 @@ import kotlinx.coroutines.launch
 class HomeScreenFragment : Fragment() {
 
     lateinit var downloadController: DownloadController
+    lateinit var  viewModel :HomeScreenFragViewModel
+    lateinit var  eventsAdapter: EventsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity().window.statusBarColor = Color.parseColor("#3f3f3f")
+        requireActivity().window.statusBarColor = Color.parseColor("#212121")
     }
 
     override fun onCreateView(
@@ -60,6 +74,34 @@ class HomeScreenFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val factory = InjectorUtils.provideHomeScreenViewModelFactory()
+        viewModel  = ViewModelProvider(this,factory).get(HomeScreenFragViewModel::class.java)
+        setUpRecyclerView()
+
+        viewModel.getContests()
+
+        viewModel.clistContests.observe(viewLifecycleOwner, Observer {response->
+            when(response)
+            {
+                is Resource.Success ->
+                {
+                    Log.d("SSSS",response.data.toString())
+                    eventsAdapter.differ.submitList(response.data!!.contestList as ArrayList<Object>)
+                }
+                is Resource.Error ->
+                    Log.d("SSSS","error" + response.message.toString())
+            }
+
+        })
+    }
+
+    private fun setUpRecyclerView() {
+        eventsAdapter = EventsAdapter()
+        rv_HSFrag.apply {
+            adapter = eventsAdapter
+            layoutManager = LinearLayoutManager(requireActivity())
+        }
     }
 
     private fun sendNotification(notification: PushNotification) =

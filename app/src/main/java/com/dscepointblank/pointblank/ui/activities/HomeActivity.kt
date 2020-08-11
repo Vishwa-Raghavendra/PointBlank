@@ -11,7 +11,6 @@ import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.ui.fragments.HomeScreenFragment
 import com.dscepointblank.pointblank.ui.fragments.WebViewFrag
 import com.dscepointblank.pointblank.utilityClasses.Constants.Companion.TOPIC
-import com.dscepointblank.pointblank.utilityClasses.DownloadController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_home.*
@@ -25,8 +24,6 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private val homeFrag: Fragment = HomeScreenFragment()
     private val fm = supportFragmentManager
     private var visibleWebView: Fragment = homeFrag
-
-    lateinit var downloadController: DownloadController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

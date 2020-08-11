@@ -1,0 +1,16 @@
+package com.dscepointblank.pointblank.apis
+
+import com.dscepointblank.pointblank.models.CListData
+import com.dscepointblank.pointblank.utilityClasses.Constants
+import retrofit2.Response
+import retrofit2.http.GET
+import retrofit2.http.Query
+
+interface CListAPI {
+    @GET("/api/v1/contest/")
+    suspend fun getContests(
+        @Query("username") userName: String = "PP",
+        @Query("api_key") apiKey: String = Constants.CLIST_API_KEY,
+        @Query("limit") limit: Int = 10
+    ) : Response<CListData>
+}

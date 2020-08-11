@@ -1,5 +1,6 @@
 package com.dscepointblank.pointblank.utilityClasses
 
+import com.dscepointblank.pointblank.apis.CListAPI
 import com.dscepointblank.pointblank.apis.CodeForcesAPI
 import com.dscepointblank.pointblank.notifications.NotificationAPI
 import retrofit2.Retrofit
@@ -25,6 +26,11 @@ class RetrofitInstance
         val codeForcesAPI: CodeForcesAPI by lazy {
             URL = Constants.CODE_FORCES_BASE_URL
             retrofit.create(CodeForcesAPI::class.java)
+        }
+
+        val clistAPI : CListAPI by lazy {
+            URL = Constants.CLIST_BASE_URL
+            retrofit.create(CListAPI::class.java)
         }
     }
 }

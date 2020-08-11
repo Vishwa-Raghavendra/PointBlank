@@ -33,5 +33,9 @@ class Constants
          val tagLineSize = tagLines.size
 
         const val TOPIC = "/topics/MyTopic"
+
+
+        const val CLIST_API_KEY = "96dcff73025ae5a23f4a5e42e7559c128a3bd09a"
+        const val CLIST_BASE_URL = "https://clist.by"
     }
 }

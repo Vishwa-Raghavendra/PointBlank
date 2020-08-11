@@ -23,9 +23,6 @@
         android:theme="@style/AppTheme">
 
         <activity android:name="com.dscepointblank.pointblank.ui.activities.BaseActivity" />
-        <activity android:name="com.dscepointblank.pointblank.ui.activities.demoLogin"/>
-
-
         <service
             android:name=".notifications.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND">
