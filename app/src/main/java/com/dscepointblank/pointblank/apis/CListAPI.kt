@@ -11,6 +11,8 @@ interface CListAPI {
     suspend fun getContests(
         @Query("username") userName: String = "PP",
         @Query("api_key") apiKey: String = Constants.CLIST_API_KEY,
-        @Query("limit") limit: Int = 10
-    ) : Response<CListData>
+        @Query("limit") limit: Int = 100,
+        @Query("start__gte")startDate :String = Constants.getDate(),
+        @Query("resource__id__in")id:Array<Int> = Constants.CONTEST_ARRAY
+    ): Response<CListData>
 }

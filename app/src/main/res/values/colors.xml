@@ -14,4 +14,13 @@
     <color name="lightWhight">#fafafa</color>
     <color name="White">#FFFFFF</color>
     <color name="cursorcolor">#AD1457</color>
+    
+    
+    <color name="codeChef">#b07b66</color>
+    <color name="hackerRank">#43a047</color>
+    <color name="leetCode">#ef6c00</color>
+    <color name="hackerEarth">#2499FF</color>
+    <color name="faceBook">#4A6187</color>
+    <color name="codingInGame">#ffeb3b</color>
+    <color name="codeForces">#DFB443</color>
 </resources>

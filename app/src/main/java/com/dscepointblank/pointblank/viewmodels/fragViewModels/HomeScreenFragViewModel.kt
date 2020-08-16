@@ -11,15 +11,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
-class HomeScreenFragViewModel(val homeScreenFragRepository: HomeScreenFragRepository) :
+class HomeScreenFragViewModel(private val homeScreenFragRepository: HomeScreenFragRepository) :
     ViewModel() {
 
 
-    val  clistContests  : MutableLiveData<Resource<CListData>> = MutableLiveData()
+    val clistContests: MutableLiveData<Resource<CListData>> = MutableLiveData()
 
 
-    fun getContests()
-    {
+    fun getContests() {
         viewModelScope.launch(Dispatchers.IO) {
             clistContests.postValue(Resource.Loading())
             val response = homeScreenFragRepository.getEventsFromClist()
@@ -27,14 +26,13 @@ class HomeScreenFragViewModel(val homeScreenFragRepository: HomeScreenFragReposi
         }
     }
 
-    private fun handleContestsResponse(response: Response<CListData>) : Resource<CListData> {
+    private fun handleContestsResponse(response: Response<CListData>): Resource<CListData> {
 
-        if(response.isSuccessful)
-        {
-            response.body()?.let {responseData ->
+        if (response.isSuccessful) {
+            response.body()?.let { responseData ->
                 return Resource.Success(responseData)
             }
         }
-        return  Resource.Error(message = response.message())
+        return Resource.Error(message = response.message())
     }
 }

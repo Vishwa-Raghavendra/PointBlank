@@ -7,9 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,7 +21,6 @@ import com.dscepointblank.pointblank.utilityClasses.Resource
 import com.dscepointblank.pointblank.utilityClasses.RetrofitInstance
 import com.dscepointblank.pointblank.viewmodels.fragViewModels.HomeScreenFragViewModel
 import com.google.gson.Gson
-import jp.wasabeef.blurry.Blurry
 import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -33,9 +29,9 @@ import kotlinx.coroutines.launch
 
 class HomeScreenFragment : Fragment() {
 
-    lateinit var downloadController: DownloadController
-    lateinit var  viewModel :HomeScreenFragViewModel
-    lateinit var  eventsAdapter: EventsAdapter
+    private lateinit var downloadController: DownloadController
+    private lateinit var viewModel: HomeScreenFragViewModel
+    private lateinit var eventsAdapter: EventsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,50 +43,26 @@ class HomeScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        val view =  inflater.inflate(R.layout.fragment_home_screen, container, false)
-
-
-
-//        view.btn_sendNotificationHomeScreen.setOnClickListener {
-//            if (view.tv_notificationTitleHomeScreen.text.toString().isNotEmpty() && view.tv_notificationDesHomeScreen.text.toString().isNotEmpty()) {
-//
-//                PushNotification(
-//                    NotificationData(
-//                        view.tv_notificationTitleHomeScreen.text.toString(),
-//                        view.tv_notificationDesHomeScreen.text.toString()
-//                    ), TOPIC
-//                )
-//                    .also { sendNotification(it) }
-//            }
-//        }
-
-
-//        view.btn_updateAppHomeScreen.setOnClickListener {
-//            checkForUpdates()
-//        }
-        return  view
+        return inflater.inflate(R.layout.fragment_home_screen, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val factory = InjectorUtils.provideHomeScreenViewModelFactory()
-        viewModel  = ViewModelProvider(this,factory).get(HomeScreenFragViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(HomeScreenFragViewModel::class.java)
         setUpRecyclerView()
 
         viewModel.getContests()
 
-        viewModel.clistContests.observe(viewLifecycleOwner, Observer {response->
-            when(response)
-            {
-                is Resource.Success ->
-                {
-                    Log.d("SSSS",response.data.toString())
+        viewModel.clistContests.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    Log.d("SSSS", response.data.toString())
                     eventsAdapter.differ.submitList(response.data!!.contestList as ArrayList<Object>)
                 }
                 is Resource.Error ->
-                    Log.d("SSSS","error" + response.message.toString())
+                    Log.d("SSSS", "error" + response.message.toString())
             }
 
         })
@@ -123,7 +95,7 @@ class HomeScreenFragment : Fragment() {
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-       downloadController.onPermissionResult(requestCode,permissions,grantResults)
+        downloadController.onPermissionResult(requestCode, permissions, grantResults)
     }
 
     private fun checkForUpdates() =
@@ -134,9 +106,28 @@ class HomeScreenFragment : Fragment() {
                     UpdateModel(1, "d")
                 )
             downloadController.beginDownloadProcess()
-        }
-        catch (e :Exception)
-        {
-            Log.d("DDDD",e.localizedMessage!!)
+        } catch (e: Exception) {
+            Log.d("DDDD", e.localizedMessage!!)
         }
 }
+
+// Inflate the layout for this fragment
+
+
+//        view.btn_sendNotificationHomeScreen.setOnClickListener {
+//            if (view.tv_notificationTitleHomeScreen.text.toString().isNotEmpty() && view.tv_notificationDesHomeScreen.text.toString().isNotEmpty()) {
+//
+//                PushNotification(
+//                    NotificationData(
+//                        view.tv_notificationTitleHomeScreen.text.toString(),
+//                        view.tv_notificationDesHomeScreen.text.toString()
+//                    ), TOPIC
+//                )
+//                    .also { sendNotification(it) }
+//            }
+//        }
+
+
+//        view.btn_updateAppHomeScreen.setOnClickListener {
+//            checkForUpdates()
+//        }
