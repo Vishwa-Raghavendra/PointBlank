@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/deepBlack"
+    app:layout_optimizationLevel="standard"
+    tools:background="@color/deepBlack"
+    tools:context=".ui.activities.SplashActivity">
+
+    <TextView
+        android:id="@+id/activity_splashPbTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat"
+        android:textColor="@color/lightWhight"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".45"
+        tools:text="Point Blank" />
+
+    <TextView
+        android:id="@+id/activity_textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:text=">"
+        android:textColor="@color/green"
+        android:textSize="68sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_splashPbTv"
+        app:layout_constraintEnd_toEndOf="@+id/activity_splashPbTv"
+        app:layout_constraintHorizontal_bias="0.57"
+        app:layout_constraintStart_toStartOf="@+id/activity_splashPbTv" />
+
+    <TextView
+        android:id="@+id/activity_textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:fontFamily="sans-serif-light"
+        android:text="@string/leftHalf"
+        android:textColor="@color/lightWhight"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_textView18"
+        app:layout_constraintEnd_toStartOf="@+id/activity_textView18"
+        app:layout_constraintTop_toTopOf="@+id/activity_textView18"
+        app:layout_constraintVertical_bias=".6" />
+
+    <TextView
+        android:id="@+id/activity_splashTagLineTV"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_splashPbTv"
+        tools:text="Its not a bug its an undocumented feature" />
+
+    <TextView
+        android:id="@+id/activity_textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="24dp"
+        android:textColor="@color/green"
+        android:text="@string/pb_sub_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

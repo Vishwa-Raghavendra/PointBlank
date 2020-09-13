@@ -15,6 +15,11 @@ class Constants {
 
         const val LINK = "link"
 
+        const val IS_VIEW = "view"
+        const val LINK_VIEW = "linkView"
+
+//        "Bad or missing mouse driver. Spank the cat [Y/N]?",
+
         //Update Constants
         const val UPDATE_COLLECTION = "UPDATE"
         const val UPDATE_DOCUMENT = "NEWVERSION"
@@ -23,7 +28,6 @@ class Constants {
         val tagLines = arrayOf(
             "Its not a bug, its an undocumented feature",
             "BB is not a feeling, its an Emotion",
-            "Bad or missing mouse driver. Spank the cat [Y/N]?",
             "To understand what recursion is, you must first understand recursion",
             "We know the right keystrokes to turn things on. ;)",
             "Once you start programming, you no longer have a life",

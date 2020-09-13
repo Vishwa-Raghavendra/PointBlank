@@ -11,6 +11,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.ui.fragments.HomeScreenFragment
 import com.dscepointblank.pointblank.ui.fragments.WebViewFrag
+import com.dscepointblank.pointblank.utilityClasses.Constants
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -28,12 +29,21 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         setContentView(R.layout.activity_home)
         window.navigationBarColor = Color.parseColor("#212121")
 
+        val intent = intent!!
+
+        val isView = intent.getBooleanExtra(Constants.IS_VIEW,false)
+
         homeFrag = HomeScreenFragment()
         visibleWebView = homeFrag
         fm.beginTransaction().add(R.id.fragContainer, homeFrag).show(homeFrag).commit()
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
         fab.setOnClickListener(this)
+
+        if(isView)
+        {
+            loadDSCEFrag(intent.getStringExtra(Constants.LINK_VIEW)!!)
+        }
 
         //FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
     }
@@ -63,20 +73,26 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
+
+    private fun loadDSCEFrag(pageURL:String) :Boolean
+    {
+        if (forumWebView == null) {
+            forumWebView = WebViewFrag.newInstance(pageURL)
+            fm.beginTransaction().add(R.id.fragContainer, forumWebView!!)
+                .hide(forumWebView!!)
+                .commit()
+        }
+
+        fab.setImageResource(R.drawable.home)
+        fm.beginTransaction().hide(visibleWebView).show(forumWebView!!).commit()
+        visibleWebView = forumWebView!!
+        return true
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuForm -> {
-                if (forumWebView == null) {
-                    forumWebView = WebViewFrag.newInstance("https://forum.dsce.in/")
-                    fm.beginTransaction().add(R.id.fragContainer, forumWebView!!)
-                        .hide(forumWebView!!)
-                        .commit()
-                }
-
-                fab.setImageResource(R.drawable.home)
-                fm.beginTransaction().hide(visibleWebView).show(forumWebView!!).commit()
-                visibleWebView = forumWebView!!
-                return true
+                return loadDSCEFrag("https://forum.dsce.in/")
             }
             R.id.menuWrite -> {
 
