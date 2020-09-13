@@ -62,6 +62,8 @@ class WebViewFrag : Fragment() {
         view.isFocusableInTouchMode = true
         view.requestFocus()
 
+
+
         webView = view.fragwebView
         progressBar = view.fragprogressBar
         swipeRefreshLayout = view.fragswipe
@@ -126,12 +128,13 @@ class WebViewFrag : Fragment() {
                 view: WebView,
                 newProgress: Int
             ) {
-                super.onProgressChanged(view, newProgress)
-                progressBar.progress = newProgress
                 if (newProgress == 100) {
                     progressBar.visibility = ProgressBar.GONE
                     swipeRefreshLayout.isRefreshing = false
                 }
+                else
+                    progressBar.visibility = View.VISIBLE
+                progressBar.progress = newProgress
             }
         }
     }
@@ -151,7 +154,7 @@ class WebViewFrag : Fragment() {
         }
     }
 
-    private fun loadUrl(pageUrl: String) {
+     private fun loadUrl(pageUrl: String) {
         webView.loadUrl(pageUrl)
     }
 }

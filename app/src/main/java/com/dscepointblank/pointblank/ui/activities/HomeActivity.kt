@@ -61,7 +61,6 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             )
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

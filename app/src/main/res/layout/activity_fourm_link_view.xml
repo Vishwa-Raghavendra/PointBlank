@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragswipe"
+    android:id="@+id/forum_fragswipe"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragments.WebViewFrag">
+    tools:context=".ui.activities.ForumLinkView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/fragprogressBar"
+            android:id="@+id/forum_fragprogressBar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,14 +28,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <WebView
-            android:id="@+id/fragwebView"
+            android:id="@+id/forum_fragwebView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="56dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragprogressBar" />
+            app:layout_constraintTop_toBottomOf="@+id/forum_fragprogressBar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

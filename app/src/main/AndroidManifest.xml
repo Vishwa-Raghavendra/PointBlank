@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.dscepointblank.pointblank">
 
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,17 +14,28 @@
 
     <application
         android:name=".utilityClasses.App"
-        android:hardwareAccelerated="true"
-        android:usesCleartextTraffic="true"
         android:allowBackup="false"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity android:name=".ui.activities.ForumLinkView" android:theme="@style/NoActionBar">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https"
+                    android:host="forum.dsce.in"/>
+            </intent-filter>
+        </activity>
 
-        <activity android:name="com.dscepointblank.pointblank.ui.activities.BaseActivity" />
+
+        <activity android:name=".ui.activities.BaseActivity" />
+
         <service
             android:name=".notifications.FirebaseService"
             android:permission="com.google.android.c2dm.permission.SEND">
@@ -36,18 +46,14 @@
         </service>
 
         <activity
-            android:name="com.dscepointblank.pointblank.ui.activities.LaunchActivity"
+            android:name=".ui.activities.LaunchActivity"
             android:theme="@style/NoActionBar">
-
-
         </activity>
-
         <activity
-            android:name="com.dscepointblank.pointblank.ui.activities.HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:theme="@style/Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -64,5 +70,3 @@
     </application>
 
 </manifest>
-
-<!--    android:theme="@style/Splash"-->
