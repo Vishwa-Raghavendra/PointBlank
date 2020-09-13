@@ -19,6 +19,7 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
+        var timeInMillis:Long = 3000
         val nextIntent = Intent(this, HomeActivity::class.java)
 
         val text = "<font color=#00C853>Point</font> <font color=#fafafa>Blank</font>"
@@ -30,20 +31,27 @@ class SplashActivity : AppCompatActivity() {
         val action = intent.action!!
 
         if (Intent.ACTION_VIEW == action) {
-            nextIntent.putExtra(Constants.IS_VIEW,true)
-            nextIntent.putExtra(Constants.LINK_VIEW,intent.dataString!!)
+
+            timeInMillis = 500
+            val mode = if (intent.dataString!!.contains("forum.dsce"))
+                Constants.LINK_FORUM_DSCE
+            else
+                Constants.LINK_WRITEUP_DSCE
+
+            nextIntent.putExtra(Constants.IS_VIEW, mode)
+            nextIntent.putExtra(Constants.LINK_VIEW, intent.dataString!!)
         } else {
-            nextIntent.putExtra(Constants.IS_VIEW,false)
+            nextIntent.putExtra(Constants.IS_VIEW, 0)
         }
 
-        nextActivity(nextIntent)
+        nextActivity(nextIntent,timeInMillis)
     }
 
-    private fun nextActivity(intent: Intent) {
+    private fun nextActivity(intent: Intent,timeInMills:Long) {
         Handler(Looper.getMainLooper()).postDelayed({
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
             finish()
-        }, 3000)
+        }, timeInMills)
     }
 }

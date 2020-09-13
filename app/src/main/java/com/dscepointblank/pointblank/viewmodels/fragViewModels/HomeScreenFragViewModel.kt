@@ -12,6 +12,8 @@ import kotlin.collections.ArrayList
 class HomeScreenFragViewModel(private val homeScreenFragRepository: HomeScreenFragRepository) :
     ViewModel() {
 
+    private var isRefresh = false
+
     init {
         getContests()
     }
@@ -25,7 +27,7 @@ class HomeScreenFragViewModel(private val homeScreenFragRepository: HomeScreenFr
 
     private fun sortList(it: ArrayList<FormattedEvents>): Resource<ArrayList<FormattedEvents>> {
         val prevData: ArrayList<FormattedEvents> = ArrayList()
-        if (!allEvents.value?.data.isNullOrEmpty()) {
+        if (!allEvents.value?.data.isNullOrEmpty()&&!isRefresh) {
             prevData.addAll(allEvents.value!!.data!!)
         }
 
@@ -33,14 +35,21 @@ class HomeScreenFragViewModel(private val homeScreenFragRepository: HomeScreenFr
         prevData.sortBy {
             Constants.toSDF.parse(it.startDate)!!.time
         }
+        isRefresh = false
         return Resource.Success(prevData)
     }
 
 
-    private fun getContests() {
+     private fun getContests() {
         viewModelScope.launch(Dispatchers.IO) {
             homeScreenFragRepository.getEvents()
         }
+    }
+
+    fun refresh()
+    {
+        isRefresh = true
+        getContests()
     }
 
     fun getShareableEventData(formattedEvents: FormattedEvents): String {

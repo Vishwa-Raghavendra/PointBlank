@@ -31,7 +31,7 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         val intent = intent!!
 
-        val isView = intent.getBooleanExtra(Constants.IS_VIEW,false)
+        val isView = intent.getIntExtra(Constants.IS_VIEW,0)
 
         homeFrag = HomeScreenFragment()
         visibleWebView = homeFrag
@@ -40,9 +40,14 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         bottomNavigation.setOnNavigationItemSelectedListener(this)
         fab.setOnClickListener(this)
 
-        if(isView)
+        if(isView>0)
         {
-            loadDSCEFrag(intent.getStringExtra(Constants.LINK_VIEW)!!)
+            when(isView)
+            {
+                Constants.LINK_FORUM_DSCE -> loadDSCEFrag(intent.getStringExtra(Constants.LINK_VIEW)!!)
+                Constants.LINK_WRITEUP_DSCE -> loadWriteUpFrag(intent.getStringExtra(Constants.LINK_VIEW)!!)
+            }
+
         }
 
         //FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
@@ -89,23 +94,28 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         return true
     }
 
+    private fun loadWriteUpFrag(pageURL: String):Boolean
+    {
+        if (writeupWebView == null) {
+            writeupWebView = WebViewFrag.newInstance(pageURL)
+            fm.beginTransaction().add(R.id.fragContainer, writeupWebView!!)
+                .hide(writeupWebView!!).commit()
+        }
+
+        fab.setImageResource(R.drawable.home)
+        fm.beginTransaction().hide(visibleWebView).show(writeupWebView!!).commit()
+        visibleWebView = writeupWebView!!
+        return true
+
+    }
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuForm -> {
                 return loadDSCEFrag("https://forum.dsce.in/")
             }
             R.id.menuWrite -> {
-
-                if (writeupWebView == null) {
-                    writeupWebView = WebViewFrag.newInstance("https://writeups.dsce.in/")
-                    fm.beginTransaction().add(R.id.fragContainer, writeupWebView!!)
-                        .hide(writeupWebView!!).commit()
-                }
-
-                fab.setImageResource(R.drawable.home)
-                fm.beginTransaction().hide(visibleWebView).show(writeupWebView!!).commit()
-                visibleWebView = writeupWebView!!
-                return true
+                return loadWriteUpFrag("https://writeups.dsce.in/")
             }
         }
         return false

@@ -54,9 +54,13 @@ class HomeScreenFragment : Fragment(), EventsAdapter.EventsAdapterListener {
         setUpRecyclerView()
 
 
+        fragHomeScreen_swipe.setOnRefreshListener { viewModel.refresh() }
+        fragHomeScreen_swipe.setColorSchemeColors(Color.GREEN)
+
         viewModel.allEvents.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Resource.Success -> {
+                    fragHomeScreen_swipe.isRefreshing = false
                     eventsAdapter.differ.submitList(it.data)
                     pb_fragHomeScreen.visibility =View.GONE
                 }

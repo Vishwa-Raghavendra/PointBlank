@@ -17,6 +17,8 @@ class Constants {
 
         const val IS_VIEW = "view"
         const val LINK_VIEW = "linkView"
+        const val LINK_FORUM_DSCE = 1
+        const val LINK_WRITEUP_DSCE =2
 
 //        "Bad or missing mouse driver. Spank the cat [Y/N]?",
 

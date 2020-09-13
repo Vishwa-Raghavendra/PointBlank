@@ -23,7 +23,9 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".ui.activities.SplashActivity" android:theme="@style/NoActionBar">
+        <activity
+            android:name=".ui.activities.SplashActivity"
+            android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -32,8 +34,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="forum.dsce.in"
+                    android:scheme="https" />
+                <data
+                    android:host="writeups.dsce.in"
                     android:scheme="https" />
             </intent-filter>
         </activity>
@@ -57,6 +63,7 @@
         <activity
             android:name=".ui.activities.HomeActivity"
             android:theme="@style/Splash">
+
         </activity>
 
         <provider

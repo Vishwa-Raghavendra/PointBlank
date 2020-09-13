@@ -79,7 +79,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation "androidx.fragment:fragment-ktx:1.2.5"
 
-    implementation 'jp.wasabeef:blurry:3.0.0'
+//    implementation 'jp.wasabeef:blurry:3.0.0'
 
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
@@ -91,5 +91,5 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
-    implementation "com.github.delight-im:Android-AdvancedWebView:v3.2.1"
+//    implementation "com.github.delight-im:Android-AdvancedWebView:v3.2.1"
 }
