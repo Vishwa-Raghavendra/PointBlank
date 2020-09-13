@@ -6,13 +6,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.adapters.EventsAdapter
-import com.dscepointblank.pointblank.models.Object
+import com.dscepointblank.pointblank.models.FormattedEvents
 import com.dscepointblank.pointblank.models.UpdateModel
 import com.dscepointblank.pointblank.notifications.PushNotification
 import com.dscepointblank.pointblank.utilityClasses.DownloadController
@@ -27,7 +28,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-class HomeScreenFragment : Fragment() {
+class HomeScreenFragment : Fragment(), EventsAdapter.EventsAdapterListener {
 
     private lateinit var downloadController: DownloadController
     private lateinit var viewModel: HomeScreenFragViewModel
@@ -35,7 +36,6 @@ class HomeScreenFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         requireActivity().window.statusBarColor = Color.parseColor("#212121")
     }
 
@@ -53,25 +53,22 @@ class HomeScreenFragment : Fragment() {
         viewModel = ViewModelProvider(this, factory).get(HomeScreenFragViewModel::class.java)
         setUpRecyclerView()
 
-        viewModel.getContests()
 
-        viewModel.clistContests.observe(viewLifecycleOwner, Observer { response ->
-            when (response) {
+        viewModel.allEvents.observe(viewLifecycleOwner, Observer {
+            when (it) {
                 is Resource.Success -> {
-                    Log.d("SSSS", response.data.toString())
-                    eventsAdapter.differ.submitList(response.data!!.contestList as ArrayList<Object>)
+                    eventsAdapter.differ.submitList(it.data)
+                    pb_fragHomeScreen.visibility =View.GONE
                 }
-                is Resource.Error ->
-                    Log.d("SSSS", "error" + response.message.toString())
             }
-
         })
     }
 
     private fun setUpRecyclerView() {
-        eventsAdapter = EventsAdapter()
+        eventsAdapter = EventsAdapter(this)
         rv_HSFrag.apply {
             adapter = eventsAdapter
+            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireActivity())
         }
     }
@@ -109,7 +106,29 @@ class HomeScreenFragment : Fragment() {
         } catch (e: Exception) {
             Log.d("DDDD", e.localizedMessage!!)
         }
+
+    override fun onEventShared(formattedEvents: FormattedEvents) {
+        val shareableContent = viewModel.getShareableEventData(formattedEvents)
+        ShareCompat.IntentBuilder.from(requireActivity())
+            .setText(shareableContent).setType("text/plain")
+            .setChooserTitle("Event Details")
+            .startChooser()
+    }
 }
+
+//        viewModel.getContests()
+
+//        viewModel.clistContests.observe(viewLifecycleOwner, Observer { response ->
+//            when (response) {
+//                is Resource.Success -> {
+//                    Log.d("SSSS", response.data.toString())
+//                    eventsAdapter.differ.submitList(response.data)
+//                }
+//                is Resource.Error ->
+//                    Log.d("SSSS", "error" + response.message.toString())
+//            }
+//
+//        })
 
 // Inflate the layout for this fragment
 

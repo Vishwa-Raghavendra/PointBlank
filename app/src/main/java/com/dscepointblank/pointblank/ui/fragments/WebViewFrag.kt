@@ -12,32 +12,40 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.SslErrorHandler
-import android.webkit.WebChromeClient
-import android.webkit.WebView
-import android.webkit.WebViewClient
+import android.webkit.*
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.dscepointblank.pointblank.R
+import com.dscepointblank.pointblank.utilityClasses.Constants
 import kotlinx.android.synthetic.main.fragment_webview.view.*
 
 
-private  const val LINK ="link"
-
 class WebViewFrag : Fragment() {
-    private lateinit var pageUrl : String
-    private lateinit var webView : WebView
+
+    companion object {
+        @JvmStatic
+        fun newInstance(url: String) =
+            WebViewFrag().apply {
+                arguments = Bundle().apply {
+                    putString(Constants.LINK, url)
+                }
+            }
+    }
+
+    private lateinit var pageUrl: String
+    private lateinit var webView: WebView
     private lateinit var progressBar: ProgressBar
-    private lateinit var swipeRefreshLayout :SwipeRefreshLayout
+    private lateinit var swipeRefreshLayout: SwipeRefreshLayout
+    private lateinit var defaultAgent :String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         arguments?.let {
-            pageUrl = it.getString(LINK).toString()
+            pageUrl = it.getString(Constants.LINK).toString()
         }
     }
 
@@ -55,71 +63,55 @@ class WebViewFrag : Fragment() {
         view.requestFocus()
 
         webView = view.fragwebView
-        webView.settings.userAgentString = System.getProperty("http.agent")
         progressBar = view.fragprogressBar
         swipeRefreshLayout = view.fragswipe
         swipeRefreshLayout.setColorSchemeColors(Color.BLUE, Color.RED, Color.GREEN)
         swipeRefreshLayout.setOnRefreshListener { webView.reload() }
 
 
-        setWebClient()
+        defaultAgent = webView.settings.userAgentString
+
+
         initWebView()
+        setUpWebClients()
         loadUrl(pageUrl)
 
 
-
-        val onBackPressed  = object :BroadcastReceiver()
-        {
+        val onBackPressed = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent?) {
-                if(webView.canGoBack())
+                if (webView.canGoBack())
                     webView.goBack()
-                else if(activity!=null)
+                else if (activity != null)
                     requireActivity().onBackPressed()
             }
 
         }
 
-        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(onBackPressed,
-            IntentFilter(this.hashCode().toString()))
+        LocalBroadcastManager.getInstance(requireContext()).registerReceiver(
+            onBackPressed,
+            IntentFilter(this.hashCode().toString())
+        )
     }
 
 
-    private fun setWebClient() {
-        webView.webChromeClient = object : WebChromeClient() {
-            override fun onProgressChanged(
-                view: WebView,
-                newProgress: Int
-            ) {
-                super.onProgressChanged(view, newProgress)
-                progressBar.progress = newProgress
-                if (newProgress < 100 && progressBar.visibility == ProgressBar.GONE) {
-                    progressBar.visibility = ProgressBar.VISIBLE
-                }
-
-                if (newProgress == 100) {
-                    progressBar.visibility = ProgressBar.GONE
-                    swipeRefreshLayout.isRefreshing=false
-                }
-            }
-        }
-    }
-
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun initWebView() {
-        webView.settings.javaScriptEnabled = true
-        webView.settings.loadWithOverviewMode = true
-        webView.settings.useWideViewPort = true
-        webView.settings.domStorageEnabled = true
-
-        webView.settings.setAppCacheEnabled(true)
-        webView.settings.databaseEnabled = true
-
-        webView.settings.setAppCachePath(requireContext().applicationContext.filesDir.absolutePath+"/cache")
+    private fun setUpWebClients() {
 
         webView.webViewClient = object : WebViewClient() {
             override
             fun onReceivedSslError(view: WebView?, handler: SslErrorHandler?, error: SslError?) {
-                handler?.proceed()
+                handler!!.proceed()
+            }
+            override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
+
+                if (url!!.contains("accounts.google"))
+                {
+                    view!!.settings.userAgentString = System.getProperty("http.agent")
+                }
+                else
+                    view!!.settings.userAgentString = defaultAgent
+
+                view.loadUrl(url)
+                return true
             }
         }
 
@@ -128,21 +120,38 @@ class WebViewFrag : Fragment() {
                 swipeRefreshLayout.isEnabled = webView.scrollY == 0
             }
         }
+
+        webView.webChromeClient = object : WebChromeClient() {
+            override fun onProgressChanged(
+                view: WebView,
+                newProgress: Int
+            ) {
+                super.onProgressChanged(view, newProgress)
+                progressBar.progress = newProgress
+                if (newProgress == 100) {
+                    progressBar.visibility = ProgressBar.GONE
+                    swipeRefreshLayout.isRefreshing = false
+                }
+            }
+        }
+    }
+
+
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun initWebView() {
+
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE,null)
+
+        webView.settings.apply {
+            javaScriptEnabled = true
+            loadWithOverviewMode = true
+            useWideViewPort = true
+            domStorageEnabled = true
+            databaseEnabled = true
+        }
     }
 
     private fun loadUrl(pageUrl: String) {
         webView.loadUrl(pageUrl)
     }
-
-
-    companion object {
-        @JvmStatic
-        fun newInstance(url : String) =
-            WebViewFrag().apply {
-                arguments = Bundle().apply {
-                    putString(LINK, url)
-                }
-            }
-    }
-
 }

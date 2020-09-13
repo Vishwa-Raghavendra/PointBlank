@@ -13,6 +13,8 @@ class Constants {
 
         const val CODE_FORCES_BASE_URL = "https://codeforces.com"
 
+        const val LINK = "link"
+
         //Update Constants
         const val UPDATE_COLLECTION = "UPDATE"
         const val UPDATE_DOCUMENT = "NEWVERSION"
@@ -75,6 +77,9 @@ class Constants {
             CODING_IN_GAME_RESOURCE_ID to R.color.codingInGame,
             CODE_FORCES_RESOURCE_ID to R.color.codeForces
         )
+
+        val fromSDF = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.US)
+        val toSDF = SimpleDateFormat("dd MMM '@' hh:mm aa", Locale.US)
 
         fun getDate(): String {
             val fromSDF = SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss", Locale.US)

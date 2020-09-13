@@ -10,5 +10,7 @@
     <string name="leftHalf"><![CDATA[<.]]></string>
     <string name="pb_sub_text">ACM ICPC| GSOC | SIH | FOSS</string>
     <string name="signup_here"><u>SignUp</u></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

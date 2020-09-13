@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
     android:id="@+id/fragswipe"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.WebViewFrag">
@@ -11,7 +12,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/deepBlack"
         android:orientation="vertical">
+
         <ProgressBar
             android:id="@+id/fragprogressBar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -20,6 +23,7 @@
             android:layout_margin="0dp"
             android:minHeight="4dp"
             android:padding="0dp"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,6 +32,7 @@
             android:id="@+id/fragwebView"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginBottom="56dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -1,6 +1,7 @@
 package com.dscepointblank.pointblank.ui.activities
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.MenuItem
@@ -10,36 +11,34 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.dscepointblank.pointblank.R
 import com.dscepointblank.pointblank.ui.fragments.HomeScreenFragment
 import com.dscepointblank.pointblank.ui.fragments.WebViewFrag
-import com.dscepointblank.pointblank.utilityClasses.Constants.Companion.TOPIC
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_home.*
-
 
 
 class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     View.OnClickListener {
-    private val forumWebView: Fragment = WebViewFrag.newInstance("https://forum.dsce.in/")
-    private val writeupWebView: Fragment = WebViewFrag.newInstance("https://writeups.dsce.in/")
-    private val homeFrag: Fragment = HomeScreenFragment()
+    private var forumWebView: Fragment? = null
+    private var writeupWebView: Fragment? = null
+    private lateinit var homeFrag: Fragment
     private val fm = supportFragmentManager
-    private var visibleWebView: Fragment = homeFrag
+    private lateinit var visibleWebView: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        fm.beginTransaction().add(R.id.fragContainer, writeupWebView).hide(writeupWebView).commit()
-        fm.beginTransaction().add(R.id.fragContainer, forumWebView).hide(forumWebView).commit()
+        window.navigationBarColor = Color.parseColor("#212121")
+
+        homeFrag = HomeScreenFragment()
+        visibleWebView = homeFrag
         fm.beginTransaction().add(R.id.fragContainer, homeFrag).show(homeFrag).commit()
 
         bottomNavigation.setOnNavigationItemSelectedListener(this)
         fab.setOnClickListener(this)
 
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+        //FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-
         return if (keyCode == KeyEvent.KEYCODE_BACK && visibleWebView !is HomeScreenFragment) {
             val intent = Intent(visibleWebView.hashCode().toString())
             LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
@@ -68,15 +67,29 @@ class HomeActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuForm -> {
+                if (forumWebView == null) {
+                    forumWebView = WebViewFrag.newInstance("https://forum.dsce.in/")
+                    fm.beginTransaction().add(R.id.fragContainer, forumWebView!!)
+                        .hide(forumWebView!!)
+                        .commit()
+                }
+
                 fab.setImageResource(R.drawable.home)
-                fm.beginTransaction().hide(visibleWebView).show(forumWebView).commit()
-                visibleWebView = forumWebView
+                fm.beginTransaction().hide(visibleWebView).show(forumWebView!!).commit()
+                visibleWebView = forumWebView!!
                 return true
             }
             R.id.menuWrite -> {
+
+                if (writeupWebView == null) {
+                    writeupWebView = WebViewFrag.newInstance("https://writeups.dsce.in/")
+                    fm.beginTransaction().add(R.id.fragContainer, writeupWebView!!)
+                        .hide(writeupWebView!!).commit()
+                }
+
                 fab.setImageResource(R.drawable.home)
-                fm.beginTransaction().hide(visibleWebView).show(writeupWebView).commit()
-                visibleWebView = writeupWebView
+                fm.beginTransaction().hide(visibleWebView).show(writeupWebView!!).commit()
+                visibleWebView = writeupWebView!!
                 return true
             }
         }

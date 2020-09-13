@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Object(
     @SerializedName("duration")
-    val duration: Int,
+    val duration: Long,
     @SerializedName("end")
     val end: String,
     @SerializedName("event")
@@ -13,7 +13,7 @@ data class Object(
     @SerializedName("href")
     val href: String,
     @SerializedName("id")
-    val id: Int,
+    val id: Long,
     @SerializedName("resource")
     val resource: Resource,
     @SerializedName("start")
