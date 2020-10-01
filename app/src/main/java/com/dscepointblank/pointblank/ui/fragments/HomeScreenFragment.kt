@@ -24,6 +24,7 @@ import com.dscepointblank.pointblank.viewmodels.fragViewModels.HomeScreenFragVie
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home_screen.*
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -46,6 +47,7 @@ class HomeScreenFragment : Fragment(), EventsAdapter.EventsAdapterListener {
         return inflater.inflate(R.layout.fragment_home_screen, container, false)
     }
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -65,6 +67,10 @@ class HomeScreenFragment : Fragment(), EventsAdapter.EventsAdapterListener {
                     pb_fragHomeScreen.visibility =View.GONE
                 }
             }
+        })
+
+        viewModel.allFlowEvents.observe(viewLifecycleOwner,{
+            Log.d("ZZZZ","From FLOW "+it.data.toString())
         })
     }
 

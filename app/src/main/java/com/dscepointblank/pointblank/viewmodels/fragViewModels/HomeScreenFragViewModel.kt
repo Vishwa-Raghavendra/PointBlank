@@ -6,6 +6,8 @@ import com.dscepointblank.pointblank.repositories.HomeScreenFragRepository
 import com.dscepointblank.pointblank.utilityClasses.Constants
 import com.dscepointblank.pointblank.utilityClasses.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
@@ -21,6 +23,20 @@ class HomeScreenFragViewModel(private val homeScreenFragRepository: HomeScreenFr
     val allEvents = Transformations.switchMap(homeScreenFragRepository.allEvents) {
         liveData<Resource<ArrayList<FormattedEvents>>>(Dispatchers.IO) {
             emit(sortList(it))
+        }
+    }
+
+    @ExperimentalCoroutinesApi
+    val  allFlowEvents = liveData<Resource<ArrayList<FormattedEvents>>>(Dispatchers.IO) {
+        emit(Resource.Loading())
+
+        try {
+            homeScreenFragRepository.flowContests().collect {
+                emit(Resource.Success(data = it))
+            }
+        }catch (e:Exception)
+        {
+
         }
     }
 
