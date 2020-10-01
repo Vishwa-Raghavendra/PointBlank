@@ -10,5 +10,5 @@
     <string name="leftHalf"><![CDATA[<.]]></string>
     <string name="pb_sub_text">ACM ICPC| GSOC | SIH | FOSS</string>
     <string name="signup_here"><u>SignUp</u></string>
-
+    <string name="about">Everyone needs a little space where they can learn, practice, and produce something. Point Blank is a community that gives the students a chance to do all of that. We started small, with a humble beginnings and now we have a community of more than 70 individuals. \n\nPoint Blank strives to be a place of collaboration and multidisciplinary work. We have students from different branches of engineering and different years of study, who bring their own unique perspectives to the table. Some of the things we work on include competitive coding, we participate in CodeChef long challenges, Codeforces rounds and also host our own weekly contest, called "PB Hustle". We have practice matches and team contests too. We also work on open source projects, competitions such as the Google Summer of Code(GSOC), Hackathons such as Smart India Hackathon(SIH) and personal projects.  \n\nWe usually operate out of the Microprocessor Lab in Department of Computer Science, DSCE.</string>
 </resources>

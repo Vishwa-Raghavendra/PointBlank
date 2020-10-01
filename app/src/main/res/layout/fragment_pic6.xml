@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pic6"
+    tools:context=".fragments.AboutViewPager.Pic6Fragment" >
+
+    <ImageView
+        android:id="@+id/imageView32"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/darkcircle" />
+
+    <ImageView
+        android:id="@+id/imageView33"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/lightcircle" />
+
+    <ImageView
+        android:id="@+id/imageView34"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="35dp"
+        android:src="@drawable/lightcircle" />
+
+    <ImageView
+        android:id="@+id/imageView35"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:src="@drawable/lightcircle" />
+
+    <ImageView
+        android:id="@+id/imageView36"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="65dp"
+        android:src="@drawable/lightcircle" />
+
+    <ImageView
+        android:id="@+id/imageView37"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="80dp"
+        android:src="@drawable/lightcircle" />
+</FrameLayout>
