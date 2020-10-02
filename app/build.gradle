@@ -92,4 +92,10 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-common-java8:$lifecycle_version"
 
 //    implementation "com.github.delight-im:Android-AdvancedWebView:v3.2.1"
+
+    // MPAndroidChart Library
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    implementation "com.squareup.okhttp3:logging-interceptor:4.5.0"
+
 }
